@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.12] - 2024-05-20
+
+### Fixed
+- **Deployment Paths**: Re-verified `vite.config.ts` settings to ensure assets load from `/MRZ-Generator/assets/` instead of `/assets/`.
+- **UI**: Updated version indicator to v0.1.12 to help verify successful deployment.
+
 ## [0.1.11] - 2024-05-20
 
 ### Fixed

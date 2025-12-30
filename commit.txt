@@ -1,5 +1,5 @@
-fix: Set Base URL for GitHub Pages (v0.1.11)
+fix: Force Rebuild for Base Path (v0.1.12)
 
-- Added base: '/MRZ-Generator/' to vite.config.ts
-- Fixes blank screen issue caused by absolute asset paths
-- Bumped version to 0.1.11
+- Updated vite.config.ts comments and options
+- Bumped visible version in App.tsx to 0.1.12
+- Ensuring GitHub Pages picks up the /MRZ-Generator/ base path
