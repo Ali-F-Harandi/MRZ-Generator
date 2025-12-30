@@ -1,6 +1,6 @@
-feat: UI Improvements & Smart Inputs (v0.1.14)
+feat: Smart Search & UI Optimizations (v0.1.15)
 
-- Expanded layout width to reduce scrolling on desktop
-- Added Country/Nationality dropdowns (sourced from new countries.ts)
-- Implemented Date Pickers for easier date entry
-- Modularized country data into src/constants/countries.ts
+- Implemented searchable country dropdown with alias support (e.g., search "America" for "USA")
+- Reduced MRZ display font size to prevent scrolling
+- Removed dates from CHANGELOG.md
+- Updated country database with common aliases

@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { DocumentType, MrzPersonalData } from '../types/mrz';
 import { COUNTRIES } from '../constants/countries';
+import SearchableSelect from './SearchableSelect';
 
 interface MrzFormProps {
   data: MrzPersonalData;
@@ -14,6 +15,13 @@ const MrzForm: React.FC<MrzFormProps> = ({ data, onChange }) => {
     onChange({
       ...data,
       [name]: value
+    });
+  };
+
+  const handleCountryChange = (field: 'countryCode' | 'nationality') => (code: string) => {
+    onChange({
+      ...data,
+      [field]: code
     });
   };
 
@@ -33,9 +41,6 @@ const MrzForm: React.FC<MrzFormProps> = ({ data, onChange }) => {
   };
 
   // Helper to convert YYMMDD (from state) to YYYY-MM-DD (for input)
-  // We need to guess the century. 
-  // For Expiry: usually 20xx. 
-  // For Birth: if > current year last 2 digits, likely 19xx, else 20xx.
   const getDateValue = (yymmdd: string, type: 'birth' | 'expiry'): string => {
     if (!yymmdd || yymmdd.length !== 6) return '';
     const yy = parseInt(yymmdd.substring(0, 2), 10);
@@ -46,26 +51,15 @@ const MrzForm: React.FC<MrzFormProps> = ({ data, onChange }) => {
     let century = '20';
 
     if (type === 'birth') {
-        // If birth year is greater than current year + 10 (future?), assume 19xx
         if (yy > currentYearShort) {
             century = '19';
         }
     } else {
-        // Expiry is usually 20xx unless it's very old document. 
-        // Simple logic: assume 20xx for now.
         century = '20';
     }
 
     return `${century}${yy}-${mm}-${dd}`;
   };
-
-  const countryOptions = useMemo(() => {
-    return COUNTRIES.sort((a, b) => a.name.localeCompare(b.name)).map(c => (
-      <option key={c.code} value={c.code}>
-        {c.name} ({c.code})
-      </option>
-    ));
-  }, []);
 
   return (
     <div className="space-y-6">
@@ -86,30 +80,26 @@ const MrzForm: React.FC<MrzFormProps> = ({ data, onChange }) => {
           </select>
         </div>
 
-        {/* Issuing Country - Dropdown */}
+        {/* Issuing Country - Searchable */}
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Issuing Country</label>
-          <select
-            name="countryCode"
+          <SearchableSelect
+            label="Issuing Country"
+            options={COUNTRIES}
             value={data.countryCode}
-            onChange={handleChange}
-            className="w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 border bg-white"
-          >
-            {countryOptions}
-          </select>
+            onChange={handleCountryChange('countryCode')}
+            placeholder="Search country (e.g. USA)"
+          />
         </div>
 
-        {/* Nationality - Dropdown */}
+        {/* Nationality - Searchable */}
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Nationality</label>
-          <select
-            name="nationality"
+          <SearchableSelect
+            label="Nationality"
+            options={COUNTRIES}
             value={data.nationality}
-            onChange={handleChange}
-            className="w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 border bg-white"
-          >
-            {countryOptions}
-          </select>
+            onChange={handleCountryChange('nationality')}
+            placeholder="Search nationality"
+          />
         </div>
 
         {/* Surname */}

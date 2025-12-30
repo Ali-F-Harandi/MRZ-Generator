@@ -1,10 +1,10 @@
 export interface Country {
   name: string;
   code: string; // 3-letter ICAO code
+  aliases?: string[]; // Alternative names for search
 }
 
 // Common countries list. 
-// In a full production app, this would be a complete ISO 3166-1 alpha-3 list.
 export const COUNTRIES: Country[] = [
   { name: "Afghanistan", code: "AFG" },
   { name: "Albania", code: "ALB" },
@@ -39,13 +39,13 @@ export const COUNTRIES: Country[] = [
   { name: "Finland", code: "FIN" },
   { name: "France", code: "FRA" },
   { name: "Georgia", code: "GEO" },
-  { name: "Germany", code: "D" }, // Germany often uses D in MRZ
+  { name: "Germany", code: "D", aliases: ["Deutschland"] },
   { name: "Greece", code: "GRC" },
   { name: "Hungary", code: "HUN" },
   { name: "Iceland", code: "ISL" },
   { name: "India", code: "IND" },
   { name: "Indonesia", code: "IDN" },
-  { name: "Iran", code: "IRN" },
+  { name: "Iran", code: "IRN", aliases: ["Persia"] },
   { name: "Iraq", code: "IRQ" },
   { name: "Ireland", code: "IRL" },
   { name: "Israel", code: "ISR" },
@@ -63,7 +63,7 @@ export const COUNTRIES: Country[] = [
   { name: "Malta", code: "MLT" },
   { name: "Mexico", code: "MEX" },
   { name: "Morocco", code: "MAR" },
-  { name: "Netherlands", code: "NLD" },
+  { name: "Netherlands", code: "NLD", aliases: ["Holland"] },
   { name: "New Zealand", code: "NZL" },
   { name: "Nigeria", code: "NGA" },
   { name: "North Macedonia", code: "MKD" },
@@ -76,7 +76,7 @@ export const COUNTRIES: Country[] = [
   { name: "Portugal", code: "PRT" },
   { name: "Qatar", code: "QAT" },
   { name: "Romania", code: "ROU" },
-  { name: "Russia", code: "RUS" },
+  { name: "Russia", code: "RUS", aliases: ["Russian Federation"] },
   { name: "Saudi Arabia", code: "SAU" },
   { name: "Serbia", code: "SRB" },
   { name: "Singapore", code: "SGP" },
@@ -93,9 +93,9 @@ export const COUNTRIES: Country[] = [
   { name: "Thailand", code: "THA" },
   { name: "Turkey", code: "TUR" },
   { name: "Ukraine", code: "UKR" },
-  { name: "United Arab Emirates", code: "ARE" },
-  { name: "United Kingdom", code: "GBR" },
-  { name: "United States", code: "USA" },
+  { name: "United Arab Emirates", code: "ARE", aliases: ["UAE"] },
+  { name: "United Kingdom", code: "GBR", aliases: ["UK", "Great Britain", "England"] },
+  { name: "United States", code: "USA", aliases: ["US", "America", "United States of America"] },
   { name: "Utopia (Test)", code: "UTO" },
   { name: "Uzbekistan", code: "UZB" },
   { name: "Venezuela", code: "VEN" },
