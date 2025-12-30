@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - Official Release
+
+### Changed
+- **Release**: Promoted to version 1.0.0.
+- **Dependencies**: Removed unused dependencies (`lucide-react`) for optimized performance.
+- **Documentation**: Updated README and Project Context for public release.
+- **Roadmap**: Deferred advanced features (i18n, history) to future versions.
+
 ## [0.1.16]
 
 ### Added

@@ -1,6 +1,6 @@
-feat: Support for ID Cards and Visas (v0.1.16)
+chore: Release v1.0.0
 
-- Added support for ID Cards TD1 (3 lines) and TD2 (2 lines)
-- Added support for Visas MRV-A and MRV-B
-- Refactored document type selection logic
-- Implemented specific check digit algorithms for all new formats
+- Promoted project to Stable Release (v1.0.0)
+- Optimized bundle by removing unused dependencies
+- Updated documentation and roadmap for public release
+- Final UI polish

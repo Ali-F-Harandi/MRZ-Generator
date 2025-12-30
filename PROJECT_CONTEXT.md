@@ -10,7 +10,7 @@ MRZ Generator is a React-based web application designed to generate, validate, a
 - **Build Tool**: Vite
 - **Deployment**: GitHub Pages (Automated via Actions or manual via script)
 
-## Core Features (Planned)
+## Core Features
 1. **Document Support**:
    - Passport (ICAO 9303 TD3)
    - ID Card (ICAO 9303 TD1)
@@ -22,14 +22,14 @@ MRZ Generator is a React-based web application designed to generate, validate, a
    - Validation of existing MRZ strings
 3. **UI/UX**:
    - Live Preview
-   - One-click Copy/Download
-   - Responsive Design (Mobile First)
-   - Smart Inputs (Dropdowns for Countries, Date Pickers)
+   - One-click Copy
+   - Searchable Country Selectors with Aliases
+   - Smart Date Input handling
 
 ## Current Status
-- **Phase**: UI Polish
-- **Version**: 0.1.14
-- **State**: Core logic complete, UI enhanced with smart inputs and wider layout.
+- **Phase**: Maintenance
+- **Version**: 1.0.0
+- **State**: Public Release. Feature complete for basic use cases.
 
 ## Directory Structure
 - `src/components`: UI Components
@@ -37,6 +37,5 @@ MRZ Generator is a React-based web application designed to generate, validate, a
 - `src/utils`: Helper functions
 - `src/types`: TypeScript definitions
 - `src/constants`: Static data (Country lists, etc.)
-- `src/locales`: Internationalization
 - `deploy.txt`: Deployment script template (rename to .bat to use)
 - `commit.txt`: Commit message template

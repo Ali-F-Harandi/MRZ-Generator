@@ -21,17 +21,19 @@
 - [x] Implement Document Type Selector
 - [x] Build Real-time Validation feedback
 
-## Phase 4: Advanced Features [IN_PROGRESS]
+## Phase 4: Advanced Features [DONE]
 - [x] Copy to Clipboard
 - [x] Smart Date Pickers
 - [x] Country Selection Dropdowns
+- [x] UI/UX Polish for v1.0.0
+
+## Phase 5: Future / Post-v1.0 [DEFERRED]
 - [ ] Add Persian Localization (i18n)
 - [ ] Implement "Download as Image"
 - [ ] History/LocalStorage support
+- [ ] Final Accessibility Audit
+- [ ] Performance Optimization (Bundle Analysis)
 
-## Phase 5: Polish & Deploy [IN_PROGRESS]
-- [x] Layout Responsiveness Improvements
-- [ ] Final Accessibility Check
-- [ ] Performance Optimization
-- [x] Production Deployment (CI/CD Pipeline Fixes)
-- [ ] Verify GitHub Pages Live URL
+## Phase 6: Maintenance [IN_PROGRESS]
+- [x] Production Deployment (GitHub Pages)
+- [ ] Periodic Updates

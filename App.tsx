@@ -43,7 +43,7 @@ const App: React.FC = () => {
           </div>
           <nav>
             <ul className="flex gap-4 text-sm font-medium text-slate-400">
-              <li><span className="bg-blue-600 text-white px-2 py-1 rounded text-xs">v0.1.14</span></li>
+              <li><span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">v1.0.0</span></li>
             </ul>
           </nav>
         </div>

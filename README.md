@@ -2,18 +2,19 @@
 
 > A powerful, client-side React application for generating and validating Machine Readable Zones (MRZ) for Passports, Visas, and ID Cards.
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## 🚀 Features (Planned)
+## 🚀 Features
 
-- **Multiple Document Support**: 
-  - Passport (TD3)
-  - ID Cards (TD1, TD2)
-  - Visas (MRV-A, MRV-B)
-- **Smart Validation**: Automatic check digit calculation (Modulo 10).
+- **Comprehensive Document Support**: 
+  - **Passports**: ICAO 9303 TD3 standard (2 lines, 44 chars).
+  - **ID Cards**: TD1 (3 lines, 30 chars) and TD2 (2 lines, 36 chars).
+  - **Visas**: MRV-A (2 lines, 44 chars) and MRV-B (2 lines, 36 chars).
+- **Smart Validation**: Automatic check digit calculation (Modulo 10) for all fields.
+- **Smart Inputs**: Searchable country dropdowns with alias support (e.g., search "America" for "USA").
 - **Live Preview**: Visual representation of the MRZ code as you type.
-- **Privacy First**: All processing happens in your browser. No data is sent to any server.
+- **Privacy First**: All processing happens entirely in your browser. **No data is sent to any server.**
 
 ## 🛠️ Tech Stack
 
