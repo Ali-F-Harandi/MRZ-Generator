@@ -1,0 +1,5 @@
+fix: Switch to Incremental Deploy (v0.1.10)
+
+- Modified deployment script to preserve .git folder
+- Now only changed files are committed and pushed
+- Bumped version to 0.1.10

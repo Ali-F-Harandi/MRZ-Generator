@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.10] - 2024-05-20
+
+### Fixed
+- **Deployment**: Reverted to **Incremental Strategy**. The script no longer deletes `.git` on every run.
+- **Git Flow**: Now only commits and pushes files that have physically changed on the disk.
+
 ## [0.1.9] - 2024-05-20
 
 ### Fixed
