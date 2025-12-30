@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.13] - 2024-05-20
+
+### Changed
+- **Configuration**: Simplified `.gitignore` to strictly exclude deployment scripts (`deploy.bat`, `deploy.txt`) and commit messages (`commit.txt`) along with standard build artifacts.
+
 ## [0.1.12] - 2024-05-20
 
 ### Fixed

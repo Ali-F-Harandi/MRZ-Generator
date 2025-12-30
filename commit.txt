@@ -1,5 +1,5 @@
-fix: Force Rebuild for Base Path (v0.1.12)
+chore: Update .gitignore rules (v0.1.13)
 
-- Updated vite.config.ts comments and options
-- Bumped visible version in App.tsx to 0.1.12
-- Ensuring GitHub Pages picks up the /MRZ-Generator/ base path
+- Simplified .gitignore to specific user requirements
+- Excluding deploy scripts and commit logs from repo
+- Bumped version to 0.1.13
