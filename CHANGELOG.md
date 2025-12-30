@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0]
+
+### Added
+- **MRZ Import/Decoder**: New feature allowing users to paste existing MRZ strings. The app automatically detects the document type and populates the form fields.
+- **Reverse Engineering Logic**: Added `MrzService.parse()` to handle parsing of TD3, TD1, TD2, MRV-A, and MRV-B formats.
+
 ## [1.0.0] - Official Release
 
 ### Changed

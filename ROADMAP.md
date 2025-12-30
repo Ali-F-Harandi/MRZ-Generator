@@ -26,6 +26,7 @@
 - [x] Smart Date Pickers
 - [x] Country Selection Dropdowns
 - [x] UI/UX Polish for v1.0.0
+- [x] **MRZ Decoder / Importer** (v1.1.0)
 
 ## Phase 5: Future / Post-v1.0 [DEFERRED]
 - [ ] Add Persian Localization (i18n)

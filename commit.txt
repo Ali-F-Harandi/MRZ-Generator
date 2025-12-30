@@ -1,6 +1,6 @@
-chore: Release v1.0.0
+feat: Add MRZ Decoder/Importer (v1.1.0)
 
-- Promoted project to Stable Release (v1.0.0)
-- Optimized bundle by removing unused dependencies
-- Updated documentation and roadmap for public release
-- Final UI polish
+- Implemented reverse parsing logic for TD3, TD1, TD2, and Visas
+- Added 'Import' feature to UI to populate form from text
+- Auto-detection of document format based on line length
+- Updated version to v1.1.0
