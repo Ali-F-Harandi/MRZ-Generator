@@ -74,9 +74,15 @@ const MrzForm: React.FC<MrzFormProps> = ({ data, onChange }) => {
             onChange={handleChange}
             className="w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 border bg-white"
           >
-            <option value={DocumentType.PASSPORT}>Passport (TD3)</option>
-            <option value={DocumentType.ID_CARD_TD1} disabled>ID Card (TD1) - Coming Soon</option>
-            <option value={DocumentType.VISA_A} disabled>Visa (MRV-A) - Coming Soon</option>
+            <optgroup label="Travel Documents">
+              <option value={DocumentType.PASSPORT}>Passport (TD3)</option>
+              <option value={DocumentType.ID_CARD_TD1}>ID Card (TD1 - 3 Lines)</option>
+              <option value={DocumentType.ID_CARD_TD2}>ID Card (TD2 - 2 Lines)</option>
+            </optgroup>
+            <optgroup label="Visas">
+              <option value={DocumentType.VISA_A}>Visa (MRV-A)</option>
+              <option value={DocumentType.VISA_B}>Visa (MRV-B)</option>
+            </optgroup>
           </select>
         </div>
 

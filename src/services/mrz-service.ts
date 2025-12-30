@@ -3,81 +3,160 @@ import { calculateCheckDigit, pad, transliterate } from '../utils/mrz-utils';
 
 export class MrzService {
   
-  /**
-   * Generates MRZ lines based on document type and input data.
-   */
   public static generate(data: MrzPersonalData): MrzResult {
     switch (data.documentType) {
       case DocumentType.PASSPORT:
         return this.generateTD3(data);
+      case DocumentType.ID_CARD_TD1:
+        return this.generateTD1(data);
+      case DocumentType.ID_CARD_TD2:
+        return this.generateTD2(data);
+      case DocumentType.VISA_A:
+        return this.generateMRVA(data);
+      case DocumentType.VISA_B:
+        return this.generateMRVB(data);
       default:
-        throw new Error(`Document type ${data.documentType} not yet implemented`);
+        throw new Error(`Document type ${data.documentType} not implemented`);
     }
   }
 
-  /**
-   * Generates TD3 (Passport) MRZ - 2 lines, 44 characters each
-   * Line 1: P<CCCSURNAME<<GIVEN<NAMES<<<<<<<<<<<<<<<<<<<<<
-   * Line 2: NUM<DNATDOB<SEXEXP<D<<<<<<<<<<<<<<CD
-   */
+  // --- TD3: Passport (2x44) ---
   private static generateTD3(data: MrzPersonalData): MrzResult {
-    // --- LINE 1 ---
-    // Pos 1-2: Document Code (P<)
     const docCode = 'P<';
-    // Pos 3-5: Issuing State (3 chars)
     const issuer = pad(transliterate(data.countryCode), 3);
-    // Pos 6-44: Name (Surname<<GivenNames)
-    const nameStr = `${transliterate(data.surname)}<<${transliterate(data.givenNames)}`;
-    const names = pad(nameStr, 39);
-    
+    const names = pad(`${transliterate(data.surname)}<<${transliterate(data.givenNames)}`, 39);
     const line1 = `${docCode}${issuer}${names}`;
 
-    // --- LINE 2 ---
-    // Pos 1-9: Document Number
-    const docNumRaw = transliterate(data.documentNumber);
-    const docNum = pad(docNumRaw, 9);
-    // Pos 10: Check digit for Doc Number
-    const docNumCheck = calculateCheckDigit(docNum);
-    
-    // Pos 11-13: Nationality (3 chars)
+    const docNum = pad(transliterate(data.documentNumber), 9);
+    const docNumCD = calculateCheckDigit(docNum);
     const nationality = pad(transliterate(data.nationality), 3);
-    
-    // Pos 14-19: Date of Birth (YYMMDD)
-    const dob = pad(data.birthDate, 6); // Assumes already verified format
-    // Pos 20: Check digit for DOB
-    const dobCheck = calculateCheckDigit(dob);
-    
-    // Pos 21: Sex (M, F, <)
+    const dob = pad(data.birthDate, 6);
+    const dobCD = calculateCheckDigit(dob);
     const sex = data.sex;
-    
-    // Pos 22-27: Date of Expiry (YYMMDD)
     const exp = pad(data.expiryDate, 6);
-    // Pos 28: Check digit for Expiry
-    const expCheck = calculateCheckDigit(exp);
+    const expCD = calculateCheckDigit(exp);
+    const personalNum = pad(data.personalNumber ? transliterate(data.personalNumber) : '', 14);
+    const personalNumCD = calculateCheckDigit(personalNum);
     
-    // Pos 29-42: Personal Number (Optional)
-    const personalNumRaw = data.personalNumber ? transliterate(data.personalNumber) : '';
-    const personalNum = pad(personalNumRaw, 14);
-    // Pos 43: Check digit for Personal Number (or < if empty? ICAO says check digit of personal number)
-    // If personal number is empty/unspecified, check digit logic might vary, usually 0 or calc on <s
-    const personalNumCheck = calculateCheckDigit(personalNum);
+    // Final CD: DocNum+CD + DOB+CD + Exp+CD + PersonalNum+CD
+    const composite = `${docNum}${docNumCD}${dob}${dobCD}${exp}${expCD}${personalNum}${personalNumCD}`;
+    const finalCD = calculateCheckDigit(composite);
 
-    // Composite Line for Final Check Digit
-    // ICAO TD3 Final Check: Pos 1-10 + 14-20 + 22-43 (DocNum+CD + DOB+CD + EXP+CD + Personal+CD)
-    // Note: It validates the data elements, not the full line string directly.
-    // The composite string is: DocNum + CD + DOB + CD + EXP + CD + PersonalNum + CD
-    const compositeData = `${docNum}${docNumCheck}${dob}${dobCheck}${exp}${expCheck}${personalNum}${personalNumCheck}`;
-    const finalCheck = calculateCheckDigit(compositeData);
+    const line2 = `${docNum}${docNumCD}${nationality}${dob}${dobCD}${sex}${exp}${expCD}${personalNum}${personalNumCD}${finalCD}`;
 
-    const line2 = `${docNum}${docNumCheck}${nationality}${dob}${dobCheck}${sex}${exp}${expCheck}${personalNum}${personalNumCheck}${finalCheck}`;
+    return { line1, line2, verification: { isValid: true, errors: [] } };
+  }
 
-    return {
-      line1,
-      line2,
-      verification: {
-        isValid: true, // TODO: Implement validation of existing MRZ
-        errors: []
-      }
-    };
+  // --- TD1: ID Card (3x30) ---
+  private static generateTD1(data: MrzPersonalData): MrzResult {
+    // Line 1: I< + Issuer(3) + DocNum(9) + CD + Opt(15)
+    const docCode = 'I<';
+    const issuer = pad(transliterate(data.countryCode), 3);
+    const docNum = pad(transliterate(data.documentNumber), 9);
+    const docNumCD = calculateCheckDigit(docNum);
+    // Use personal number for Optional Data 1 if fits, else blank
+    const opt1 = pad(data.personalNumber ? transliterate(data.personalNumber) : '', 15);
+    
+    const line1 = `${docCode}${issuer}${docNum}${docNumCD}${opt1}`;
+
+    // Line 2: DOB(6)+CD + Sex(1) + Exp(6)+CD + Nat(3) + Opt2(11) + FinalCD
+    const dob = pad(data.birthDate, 6);
+    const dobCD = calculateCheckDigit(dob);
+    const sex = data.sex;
+    const exp = pad(data.expiryDate, 6);
+    const expCD = calculateCheckDigit(exp);
+    const nationality = pad(transliterate(data.nationality), 3);
+    const opt2 = pad('', 11); // Second optional field usually empty or internal
+    
+    // Final CD for TD1: Line 1(6-30) + Line 2(1-7) + Line 2(9-15) + Line 2(19-29)
+    // Means: DocNum+CD+Opt1 + DOB+CD + Exp+CD + Opt2
+    const composite = `${docNum}${docNumCD}${opt1}${dob}${dobCD}${exp}${expCD}${opt2}`;
+    const finalCD = calculateCheckDigit(composite);
+
+    const line2 = `${dob}${dobCD}${sex}${exp}${expCD}${nationality}${opt2}${finalCD}`;
+
+    // Line 3: Name(30)
+    const names = pad(`${transliterate(data.surname)}<<${transliterate(data.givenNames)}`, 30);
+    const line3 = names;
+
+    return { line1, line2, line3, verification: { isValid: true, errors: [] } };
+  }
+
+  // --- TD2: ID Card (2x36) ---
+  private static generateTD2(data: MrzPersonalData): MrzResult {
+    // Line 1: I< + Issuer(3) + Name(31)
+    const docCode = 'I<';
+    const issuer = pad(transliterate(data.countryCode), 3);
+    const names = pad(`${transliterate(data.surname)}<<${transliterate(data.givenNames)}`, 31);
+    const line1 = `${docCode}${issuer}${names}`;
+
+    // Line 2: DocNum(9)+CD + Nat(3) + DOB(6)+CD + Sex(1) + Exp(6)+CD + Opt(7) + FinalCD
+    const docNum = pad(transliterate(data.documentNumber), 9);
+    const docNumCD = calculateCheckDigit(docNum);
+    const nationality = pad(transliterate(data.nationality), 3);
+    const dob = pad(data.birthDate, 6);
+    const dobCD = calculateCheckDigit(dob);
+    const sex = data.sex;
+    const exp = pad(data.expiryDate, 6);
+    const expCD = calculateCheckDigit(exp);
+    const opt = pad(data.personalNumber ? transliterate(data.personalNumber) : '', 7);
+    
+    // Final CD: DocNum+CD + DOB+CD + Exp+CD + Opt
+    const composite = `${docNum}${docNumCD}${dob}${dobCD}${exp}${expCD}${opt}`;
+    const finalCD = calculateCheckDigit(composite);
+
+    const line2 = `${docNum}${docNumCD}${nationality}${dob}${dobCD}${sex}${exp}${expCD}${opt}${finalCD}`;
+
+    return { line1, line2, verification: { isValid: true, errors: [] } };
+  }
+
+  // --- MRV-A: Visa (2x44) ---
+  private static generateMRVA(data: MrzPersonalData): MrzResult {
+    // Line 1: V< + Issuer(3) + Name(39)
+    const docCode = 'V<';
+    const issuer = pad(transliterate(data.countryCode), 3);
+    const names = pad(`${transliterate(data.surname)}<<${transliterate(data.givenNames)}`, 39);
+    const line1 = `${docCode}${issuer}${names}`;
+
+    // Line 2: DocNum(9)+CD + Nat(3) + DOB(6)+CD + Sex(1) + Exp(6)+CD + Opt(16)
+    const docNum = pad(transliterate(data.documentNumber), 9);
+    const docNumCD = calculateCheckDigit(docNum);
+    const nationality = pad(transliterate(data.nationality), 3);
+    const dob = pad(data.birthDate, 6);
+    const dobCD = calculateCheckDigit(dob);
+    const sex = data.sex;
+    const exp = pad(data.expiryDate, 6);
+    const expCD = calculateCheckDigit(exp);
+    const opt = pad(data.personalNumber ? transliterate(data.personalNumber) : '', 16);
+    
+    // No Final CD for MRV-A
+    const line2 = `${docNum}${docNumCD}${nationality}${dob}${dobCD}${sex}${exp}${expCD}${opt}`;
+
+    return { line1, line2, verification: { isValid: true, errors: [] } };
+  }
+
+  // --- MRV-B: Visa (2x36) ---
+  private static generateMRVB(data: MrzPersonalData): MrzResult {
+    // Line 1: V< + Issuer(3) + Name(31)
+    const docCode = 'V<';
+    const issuer = pad(transliterate(data.countryCode), 3);
+    const names = pad(`${transliterate(data.surname)}<<${transliterate(data.givenNames)}`, 31);
+    const line1 = `${docCode}${issuer}${names}`;
+
+    // Line 2: DocNum(9)+CD + Nat(3) + DOB(6)+CD + Sex(1) + Exp(6)+CD + Opt(8)
+    const docNum = pad(transliterate(data.documentNumber), 9);
+    const docNumCD = calculateCheckDigit(docNum);
+    const nationality = pad(transliterate(data.nationality), 3);
+    const dob = pad(data.birthDate, 6);
+    const dobCD = calculateCheckDigit(dob);
+    const sex = data.sex;
+    const exp = pad(data.expiryDate, 6);
+    const expCD = calculateCheckDigit(exp);
+    const opt = pad(data.personalNumber ? transliterate(data.personalNumber) : '', 8);
+    
+    // No Final CD for MRV-B
+    const line2 = `${docNum}${docNumCD}${nationality}${dob}${dobCD}${sex}${exp}${expCD}${opt}`;
+
+    return { line1, line2, verification: { isValid: true, errors: [] } };
   }
 }

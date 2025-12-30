@@ -13,6 +13,7 @@
 - [x] Create Transliteration service (Latin-based char mapping)
 - [x] Define TypeScript interfaces for Document Types (TD1, TD2, TD3)
 - [x] Implement MRZ generation class/functions for Passport (TD3)
+- [x] Implement logic for ID Cards (TD1, TD2) and Visas (MRV-A, MRV-B)
 
 ## Phase 3: UI Implementation [DONE]
 - [x] Create Input Forms for Personal Data

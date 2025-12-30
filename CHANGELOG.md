@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.16]
+
+### Added
+- **Multiple Document Support**: Added full support for 4 new document types:
+  - **ID Cards (TD1)**: 3-line format (30 characters).
+  - **ID Cards (TD2)**: 2-line format (36 characters).
+  - **Visas (MRV-A)**: 2-line format (44 characters).
+  - **Visas (MRV-B)**: 2-line format (36 characters).
+- **Core Logic**: Implemented specific MRZ generation and checksum rules for all above types.
+
 ## [0.1.15]
 
 ### Added

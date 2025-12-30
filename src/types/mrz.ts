@@ -1,9 +1,9 @@
 export enum DocumentType {
-  PASSPORT = 'P', // TD3 (2 lines x 44 chars)
-  ID_CARD_TD1 = 'I', // TD1 (3 lines x 30 chars) - Usually ID cards
-  ID_CARD_TD2 = 'I', // TD2 (2 lines x 36 chars) - Can be ID or Visa
-  VISA_A = 'V', // MRV-A (2 lines x 44 chars)
-  VISA_B = 'V', // MRV-B (2 lines x 36 chars)
+  PASSPORT = 'TD3',       // Passport (2 lines x 44 chars)
+  ID_CARD_TD1 = 'TD1',    // ID Card (3 lines x 30 chars)
+  ID_CARD_TD2 = 'TD2',    // ID Card (2 lines x 36 chars)
+  VISA_A = 'MRVA',        // Visa A (2 lines x 44 chars)
+  VISA_B = 'MRVB',        // Visa B (2 lines x 36 chars)
 }
 
 export type Gender = 'M' | 'F' | '<';
@@ -18,7 +18,7 @@ export interface MrzPersonalData {
   nationality: string; // 3-letter ICAO code
   surname: string;
   givenNames: string;
-  personalNumber?: string; // Optional, often used in ID cards
+  personalNumber?: string; // Optional
 }
 
 export interface MrzResult {
