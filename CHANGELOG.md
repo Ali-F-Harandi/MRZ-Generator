@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.11] - 2024-05-20
+
+### Fixed
+- **GitHub Pages 404 Error**: Added `base: '/MRZ-Generator/'` to `vite.config.ts`. This fixes the issue where scripts and styles were trying to load from the root domain instead of the repository subfolder.
+
 ## [0.1.10] - 2024-05-20
 
 ### Fixed

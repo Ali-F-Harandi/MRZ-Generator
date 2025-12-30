@@ -1,5 +1,5 @@
-fix: Switch to Incremental Deploy (v0.1.10)
+fix: Set Base URL for GitHub Pages (v0.1.11)
 
-- Modified deployment script to preserve .git folder
-- Now only changed files are committed and pushed
-- Bumped version to 0.1.10
+- Added base: '/MRZ-Generator/' to vite.config.ts
+- Fixes blank screen issue caused by absolute asset paths
+- Bumped version to 0.1.11
