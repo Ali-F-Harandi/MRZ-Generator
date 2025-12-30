@@ -1,5 +1,6 @@
-chore: Update .gitignore rules (v0.1.13)
+feat: UI Improvements & Smart Inputs (v0.1.14)
 
-- Simplified .gitignore to specific user requirements
-- Excluding deploy scripts and commit logs from repo
-- Bumped version to 0.1.13
+- Expanded layout width to reduce scrolling on desktop
+- Added Country/Nationality dropdowns (sourced from new countries.ts)
+- Implemented Date Pickers for easier date entry
+- Modularized country data into src/constants/countries.ts

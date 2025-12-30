@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.14] - 2024-05-20
+
+### Added
+- **Country Database**: Added `countries.ts` with a list of nations and ICAO codes.
+- **Smart Forms**: Replaced manual text inputs with dropdowns for Country/Nationality selection.
+- **Date Pickers**: Added native date pickers for Birth Date and Expiry Date with auto-conversion to MRZ format.
+
+### Changed
+- **Layout**: Increased application width (`max-w-7xl`) to prevent scrolling on standard desktop screens.
+
 ## [0.1.13] - 2024-05-20
 
 ### Changed

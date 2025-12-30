@@ -1,7 +1,7 @@
 # Project Context: MRZ Generator
 
 ## Overview
-MRZ Generator is a React-based web application designed to generate, validate, and visualize Machine Readable Zones (MRZ) for various official documents including Passports (TD3), Visas, and ID Cards (TD1, TD2).
+MRZ Generator is a React-based web application designed to generate, validate, and visualize Machine Readable Zone (MRZ) data for various official documents including Passports (TD3), Visas, and ID Cards (TD1, TD2).
 
 ## Tech Stack
 - **Framework**: React 18+
@@ -24,17 +24,19 @@ MRZ Generator is a React-based web application designed to generate, validate, a
    - Live Preview
    - One-click Copy/Download
    - Responsive Design (Mobile First)
+   - Smart Inputs (Dropdowns for Countries, Date Pickers)
 
 ## Current Status
-- **Phase**: Initialization Complete
-- **Version**: 0.1.0
-- **State**: Project structure defined, documentation complete, CI/CD pipeline configured.
+- **Phase**: UI Polish
+- **Version**: 0.1.14
+- **State**: Core logic complete, UI enhanced with smart inputs and wider layout.
 
 ## Directory Structure
 - `src/components`: UI Components
 - `src/services`: Core MRZ calculation logic
 - `src/utils`: Helper functions
 - `src/types`: TypeScript definitions
+- `src/constants`: Static data (Country lists, etc.)
 - `src/locales`: Internationalization
 - `deploy.txt`: Deployment script template (rename to .bat to use)
 - `commit.txt`: Commit message template

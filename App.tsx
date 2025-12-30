@@ -43,15 +43,16 @@ const App: React.FC = () => {
           </div>
           <nav>
             <ul className="flex gap-4 text-sm font-medium text-slate-400">
-              <li><span className="bg-blue-600 text-white px-2 py-1 rounded text-xs">v0.1.12</span></li>
+              <li><span className="bg-blue-600 text-white px-2 py-1 rounded text-xs">v0.1.14</span></li>
             </ul>
           </nav>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-8">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <main className="flex-grow w-full px-4 py-8 mx-auto">
+        {/* Increased width to 7xl and max-width 95% for better responsiveness */}
+        <div className="max-w-[95%] xl:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Left Column: Input */}
           <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">

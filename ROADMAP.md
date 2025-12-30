@@ -20,13 +20,16 @@
 - [x] Implement Document Type Selector
 - [x] Build Real-time Validation feedback
 
-## Phase 4: Advanced Features [TODO]
-- [x] Copy to Clipboard (Implemented in Phase 3)
+## Phase 4: Advanced Features [IN_PROGRESS]
+- [x] Copy to Clipboard
+- [x] Smart Date Pickers
+- [x] Country Selection Dropdowns
 - [ ] Add Persian Localization (i18n)
 - [ ] Implement "Download as Image"
 - [ ] History/LocalStorage support
 
 ## Phase 5: Polish & Deploy [IN_PROGRESS]
+- [x] Layout Responsiveness Improvements
 - [ ] Final Accessibility Check
 - [ ] Performance Optimization
 - [x] Production Deployment (CI/CD Pipeline Fixes)
