@@ -1,0 +1,5 @@
+{
+  "name": "MRZ Generator",
+  "description": "A comprehensive React application for generating and validating Machine Readable Zone (MRZ) data for passports, visas, and ID cards.",
+  "requestFramePermissions": []
+}

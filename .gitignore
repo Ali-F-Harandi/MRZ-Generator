@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+*.bat
+*.log
+deploy.txt
+commit.txt
+.DS_Store
+.vscode
